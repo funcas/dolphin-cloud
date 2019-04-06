@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 数据字典数据访问映射 -->
+<mapper namespace="cn.goktech.dolphin.upms.mapper.DataDictionaryMapper" >
+
+    <select id="find" resultType="dataDictionary">
+        <trim prefix="WHERE" prefixOverrides="AND" />
+        SELECT
+          t.id AS "id",
+          t.name AS "name",
+          t.code AS "code",
+          t.remark AS "remark",
+          t.type AS "type",
+          t.value AS "value",
+          t.fk_category_id AS "fkCategoryId",
+          tc.name as "categoryName"
+        FROM
+          tb_data_dictionary t join tb_dictionary_category tc on t.fk_category_id = tc.id
+        <where>
+
+            <if test="filter.name != null and filter.name != ''">
+                <bind name="filter.name" value=" '%' + filter.name + '%' " />
+                t.name LIKE #{filter.name}
+            </if>
+
+            <if test="filter.code != null and filter.code != ''">
+                <bind name="filter.code" value=" '%' + filter.code + '%' " />
+                t.code LIKE #{filter.code}
+            </if>
+
+            <if test="filter.value != null and filter.value != ''">
+                <bind name="filter.value" value=" '%' + filter.value + '%' " />
+                AND t.value LIKE #{filter.value}
+            </if>
+
+            <if test="filter.fk_category_id != null and filter.fk_category_id != ''">
+                AND t.fk_category_id = #{filter.fk_category_id}
+            </if>
+
+            <if test="filter.type != null and filter.type != ''">
+                AND t.type = #{filter.type}
+            </if>
+
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="isCodeUnique" resultType="boolean">
+        SELECT
+          count(id)
+        FROM
+          tb_data_dictionary
+        WHERE
+          code = #{code}
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: dolphin-upms-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/platform?useSSL=false
+    username: root
+    password: P@ssw0rd
+    hikari:
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+  redis:
+    host: ${redis}
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos}
+  profiles:
+    active: ${gok-env}
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*/*-mapper.xml
+  type-aliases-package: cn.goktech.dolphin.upms.entity
+  configuration:
+    log-prefix: dao.
+    map-underscore-to-camel-case: true
+
+ignore:
+  urls:
+    - /actuator/**
+    - /demo/**
+    - /sys/userinfo
+
+

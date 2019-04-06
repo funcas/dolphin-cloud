@@ -1,0 +1,36 @@
+server:
+  undertow:
+    io-threads: 4
+#    worker-threads: 32
+#    buffer-size: 1024
+#    direct-buffers: true
+  port: 9000
+spring:
+  application:
+    name: dolphin-auth-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/platform?useSSL=false
+    username: root
+    password: P@ssw0rd
+  redis:
+    host: ${redis}
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos}
+  profiles:
+    active: ${gok-env}
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*/*-mapper.xml
+  type-aliases-package: cn.goktech.dolphin.security.entity
+  configuration:
+    log-prefix: dao.
+    map-underscore-to-camel-case: true
+feign:
+  hystrix:
+    enabled: true
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000

@@ -1,0 +1,20 @@
+server:
+  port: 7400
+
+spring:
+  application:
+    name: dolphin-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+    nacos:
+      discovery:
+        server-addr: ${nacos}
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000

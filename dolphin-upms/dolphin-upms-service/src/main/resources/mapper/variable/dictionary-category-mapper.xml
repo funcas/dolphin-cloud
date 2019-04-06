@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 字典类别数据访问映射 -->
+<mapper namespace="cn.goktech.dolphin.upms.mapper.DictionaryCategoryMapper" >
+
+    <select id="getAll" resultType="dictionaryCategory">
+          SELECT
+            id AS "id",
+			code AS "code",
+			name AS "name",
+			remark AS "remark",
+            edit_able as "editAble",
+            remove_able as "removeAble"
+          FROM
+            tb_dictionary_category
+          <if test="ignore != null and ignore.length > 0">
+            WHERE id NOT IN
+            <foreach collection="ignore" item="id" index="index" open="(" separator="," close=")" >
+              #{id}
+            </foreach>
+          </if>
+    </select>
+
+    <select id="find" resultType="dictionaryCategory">
+        <trim prefix="WHERE" prefixOverrides="AND" />
+        SELECT
+          id AS "id",
+          code AS "code",
+          name AS "name",
+          remark AS "remark",
+          edit_able as "editAble",
+          remove_able as "removeAble"
+        FROM
+          tb_dictionary_category
+        <where>
+            <if test="filter.code != null and filter.code != ''">
+                code = #{filter.code}
+            </if>
+
+            <if test="filter.name != null and filter.name != ''">
+                <bind name="filter.name" value=" '%' + filter.name + '%' " />
+                AND name LIKE #{filter.name}
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="isCodeUnique" resultType="boolean">
+        SELECT
+          count(id)
+        FROM
+          tb_dictionary_category
+        WHERE
+          code = #{code}
+    </select>
+
+    <delete id="deleteDataDictionaryAssociation">
+        DELETE FROM tb_data_dictionary WHERE fk_category_id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,94 @@
+package cn.goktech.dolphin.upms.rest;
+
+import cn.goktech.dolphin.common.ApiResult;
+import cn.goktech.dolphin.common.PageRequest;
+import cn.goktech.dolphin.common.PropertyFilters;
+import cn.goktech.dolphin.common.base.BaseController;
+import cn.goktech.dolphin.upms.entity.Group;
+import cn.goktech.dolphin.upms.service.IAccountService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
+
+/**
+ * @author funcas
+ * @version 1.0
+ * @date 2018年10月14日
+ */
+@RestController
+@RequestMapping("/sys")
+public class GroupController extends BaseController {
+
+    private final IAccountService accountService;
+
+    @Autowired
+    public GroupController(IAccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    /**
+     * 分页获取组列表
+     * @param pageRequest
+     * @param request
+     * @return
+     */
+    @GetMapping("/groups")
+    @PreAuthorize("hasAuthority('group:list')")
+    public ApiResult list(PageRequest pageRequest, HttpServletRequest request) {
+        IPage<Group> groupList = accountService.findGroups(pageRequest, PropertyFilters.get(request, true));
+        return success(groupList);
+    }
+
+    /**
+     * 根据id获取组信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/group/{id}")
+    @PreAuthorize("hasAuthority('group:edit')")
+    public ApiResult edit(@PathVariable("id") Long id) {
+        return success(accountService.getGroup(id));
+    }
+
+    /**
+     * 保存组信息
+     * @param group
+     * @return
+     */
+    @PostMapping("/group")
+    @PreAuthorize("hasAuthority('group:save')")
+    public ApiResult save(@Valid @RequestBody Group group) {
+        accountService.saveGroup(group);
+        return success(group);
+    }
+
+    /**
+     * 按id删除组信息
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/group/{id}")
+    @PreAuthorize("hasAuthority('group:delete')")
+    public ApiResult delete(@PathVariable("id") Long id) {
+        accountService.deleteGroups(Lists.newArrayList(id));
+        return success(id);
+    }
+
+    /**
+     * 批量删除组
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("/group/batch")
+    @PreAuthorize("hasAuthority('group:delete')")
+    public ApiResult deleteBatch(List<Long> ids) {
+        accountService.deleteGroups(ids);
+        return success(ids);
+    }
+}
