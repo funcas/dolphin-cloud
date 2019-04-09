@@ -13,6 +13,8 @@
         <module>dolphin-gateway</module>
         <module>dolphin-common</module>
         <module>dolphin-wechat</module>
+        <module>dolphin-oss</module>
+        <module>dolphin-pay</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -28,7 +30,7 @@
         <mysql.version>6.0.5</mysql.version>
         <druid.version>1.1.9</druid.version>
         <java-jwt.version>3.0.2</java-jwt.version>
-        <fastjson.version>1.2.51</fastjson.version>
+        <fastjson.version>1.2.56</fastjson.version>
         <guava.version>20.0</guava.version>
         <common-lang.version>3.3.2</common-lang.version>
         <mybatis.plus.version>2.0.5</mybatis.plus.version>
@@ -46,6 +48,7 @@
         <protostuff.version>1.6.0</protostuff.version>
         <activiti.version>6.0.0</activiti.version>
         <httpclient.version>4.5.3</httpclient.version>
+        <curator.version>2.6.0</curator.version>
     </properties>
 
     <repositories>
@@ -255,6 +258,19 @@
                 <artifactId>jedis</artifactId>
                 <version>2.9.0</version>
             </dependency>
+
+            <!--zk-->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -309,8 +325,8 @@
             <id>dev</id>
             <properties>
                 <gok-env>dev</gok-env>
-                <nacos>127.0.0.1:8848</nacos>
-                <redis>127.0.0.1</redis>
+                <nacos>192.168.2.218:8848</nacos>
+                <redis>192.168.2.218</redis>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>

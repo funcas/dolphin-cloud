@@ -1,18 +1,13 @@
-package cn.goktech.dolphin.upms.service;
+package cn.goktech.dolphin.security.service;
 
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 /**
  * @author funcas
  * @version 1.0
- * @date 2018年11月09日
+ * @date 2019年04月08日
  */
-public interface ISystemCommonService {
+public interface ITokenService {
 
-    /**
-     * 回收accessToken
-     * @param authentication
-     * @return
-     */
     public boolean revokeAccessToken(OAuth2Authentication authentication);
 }

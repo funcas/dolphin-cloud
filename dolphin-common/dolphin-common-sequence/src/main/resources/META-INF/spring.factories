@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.goktech.dolphin.common.sequence.conf.SeqConfiguration,\
+  cn.goktech.dolphin.common.sequence.IdWorker

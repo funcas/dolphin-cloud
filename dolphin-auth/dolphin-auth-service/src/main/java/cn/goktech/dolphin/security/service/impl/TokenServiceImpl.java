@@ -1,6 +1,6 @@
-package cn.goktech.dolphin.upms.service.impl;
+package cn.goktech.dolphin.security.service.impl;
 
-import cn.goktech.dolphin.upms.service.ISystemCommonService;
+import cn.goktech.dolphin.security.service.ITokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 /**
  * @author funcas
  * @version 1.0
- * @date 2018年11月09日
+ * @date 2019年04月08日
  */
 @Service
-public class SystemCommonSerivceImpl implements ISystemCommonService {
+public class TokenServiceImpl implements ITokenService {
 
     private final RedisTokenStore tokenStore;
 
     @Autowired
-    public SystemCommonSerivceImpl(RedisTokenStore tokenStore) {
+    public TokenServiceImpl(RedisTokenStore tokenStore) {
         this.tokenStore = tokenStore;
     }
 

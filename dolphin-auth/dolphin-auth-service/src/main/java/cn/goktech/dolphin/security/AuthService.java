@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * @author funcas
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @date 2019年04月03日
  */
 @SpringCloudApplication
+@EnableResourceServer
 @EnableFeignClients(basePackages = "cn.goktech.dolphin.*.feign")
 public class AuthService {
 

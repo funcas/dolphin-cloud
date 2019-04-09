@@ -15,7 +15,6 @@ import java.util.List;
  * @version 1.0
  * @date 2019年04月06日
  */
-@Component
 @Slf4j
 public class RemoteUserServiceFallback implements FallbackFactory<RemoteUserService> {
 

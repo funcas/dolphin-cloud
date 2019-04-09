@@ -9,12 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dolphin-common</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>dolphin-common-core</module>
-        <module>dolphin-common-sequence</module>
-    </modules>
+    <artifactId>dolphin-oss</artifactId>
 
 
 </project>

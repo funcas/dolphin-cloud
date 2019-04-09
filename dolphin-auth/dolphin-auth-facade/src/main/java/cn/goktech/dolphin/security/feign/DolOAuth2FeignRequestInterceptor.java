@@ -53,9 +53,8 @@ public class DolOAuth2FeignRequestInterceptor implements RequestInterceptor{
     @Override
     public void apply(RequestTemplate template) {
         SecurityContext ctx = SecurityContextHolder.getContext();
-//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (ctx != null) {
-
+        if (ctx != null && ctx.getAuthentication() != null
+                && ctx.getAuthentication().getDetails() instanceof OAuth2AuthenticationDetails) {
             String token = ((OAuth2AuthenticationDetails)ctx.getAuthentication().getDetails()).getTokenValue();
             template.header(AUTHORIZATION_HEADER, String.format("%s %s",BEARER_TOKEN_TYPE,token));
             LOGGER.debug("Constructing Header {} for Token {}", AUTHORIZATION_HEADER, BEARER_TOKEN_TYPE);

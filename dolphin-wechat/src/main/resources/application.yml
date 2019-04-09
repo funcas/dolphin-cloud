@@ -2,7 +2,7 @@ server:
   port: 9002
 spring:
   application:
-    name: dolphin-wechat-server
+    name: dolphin-wechat-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/platform?useSSL=false
@@ -30,7 +30,6 @@ mybatis-plus:
 ignore:
   urls:
     - /actuator/**
-    - /wechat/**
 
 feign:
   hystrix:
@@ -38,7 +37,6 @@ feign:
 
 hystrix:
   shareSecurityContext: true
-
 
 # hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000
 

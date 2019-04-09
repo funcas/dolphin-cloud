@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.goktech</groupId>
-            <artifactId>dolphin-common</artifactId>
+            <artifactId>dolphin-common-sequence</artifactId>
             <version>0.0.1</version>
         </dependency>
 

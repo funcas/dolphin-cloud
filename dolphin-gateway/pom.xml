@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.goktech</groupId>
-            <artifactId>dolphin-common</artifactId>
+            <artifactId>dolphin-common-core</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
