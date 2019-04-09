@@ -2,8 +2,7 @@ package cn.goktech.dolphin.pay.rest;
 
 import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.base.BaseController;
-import cn.goktech.dolphin.common.sequence.ISequence;
-import cn.goktech.dolphin.common.sequence.IdWorker;
+import cn.goktech.dolphin.common.sequence.IdTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ public class PayDemo extends BaseController {
 
     @GetMapping("/getKey")
     public ApiResult<Long> getKey() {
-        return success(IdWorker.getId());
+        return success(IdTools.getId());
     }
 
 }

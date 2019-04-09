@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
  * @date 2019年04月08日
  */
 @Component
-public class IdWorker {
+public class IdTools {
 
     private static ISequence sequence;
 
     @Autowired
     public void setSequence(ISequence sequence) {
-        IdWorker.sequence = sequence;
+        IdTools.sequence = sequence;
     }
 
     public static Long getId() {

@@ -47,3 +47,7 @@ hystrix:
   shareSecurityContext: true
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000
+
+seq:
+  zkAddr: 192.168.2.218:2181
+  distribute: false

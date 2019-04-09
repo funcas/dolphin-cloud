@@ -3,8 +3,8 @@ package cn.goktech.dolphin.upms.service.impl;
 import cn.goktech.dolphin.common.PageRequest;
 import cn.goktech.dolphin.common.enumeration.entity.ResourceType;
 import cn.goktech.dolphin.common.exception.ServiceException;
+import cn.goktech.dolphin.common.sequence.IdTools;
 import cn.goktech.dolphin.common.util.CollectionUtils;
-import cn.goktech.dolphin.common.util.IdWorker;
 import cn.goktech.dolphin.upms.entity.Group;
 import cn.goktech.dolphin.upms.entity.Resource;
 import cn.goktech.dolphin.upms.entity.User;
@@ -68,7 +68,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if (entity.getId() != null) {
             updateUser(entity);
         } else {
-            entity.setId(IdWorker.getId());
+            entity.setId(IdTools.getId());
             insertUser(entity);
         }
     }
@@ -86,7 +86,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
 
         String encryptPassword = passwordEncoder.encode(entity.getPassword());
         entity.setPassword(encryptPassword);
-        entity.setId(IdWorker.getId());
+        entity.setId(IdTools.getId());
         userMapper.insert(entity);
 
         if (CollectionUtils.isNotEmpty(entity.getGroups())) {
@@ -329,7 +329,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if (entity.getId() != null) {
             updateGroup(entity);
         } else {
-            entity.setId(IdWorker.getId());
+            entity.setId(IdTools.getId());
             insertGroup(entity);
         }
     }
@@ -513,7 +513,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if (entity.getId() != null) {
             resourceMapper.updateById(entity);
         } else {
-            entity.setId(IdWorker.getId());
+            entity.setId(IdTools.getId());
             resourceMapper.insert(entity);
         }
     }
