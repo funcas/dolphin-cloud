@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,10 @@ import java.util.Map;
  * @version 1.0
  * @date 2018年11月09日
  */
-@RestController
+
 @Slf4j
+@RestController
+@RequestMapping("/sys")
 public class SystemCommonController extends BaseController {
 
     private final RemoteAuthService remoteAuthService;
@@ -40,7 +43,7 @@ public class SystemCommonController extends BaseController {
      * @param
      * @return
      */
-    @PostMapping("/_logout")
+    @PostMapping("/logout")
     public ApiResult logout() {
         ApiResult<Boolean> result = remoteAuthService.revokeAccessToken();
         return success(result);
@@ -51,7 +54,7 @@ public class SystemCommonController extends BaseController {
      * @param params
      * @return
      */
-    @PostMapping("/_login")
+    @PostMapping("/login")
     public ApiResult<OAuth2AccessToken> login(@RequestParam Map<String, String> params){
         params.put("grant_type", "password");
         params.put("client_id", appid);

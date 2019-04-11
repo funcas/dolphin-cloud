@@ -19,5 +19,5 @@ public abstract class AbstractPreparableAuthenticator implements IAuthenticator 
     public abstract boolean support(IntegrationAuthentication integrationAuthentication);
 
     @Override
-    public void complete(IntegrationAuthentication integrationAuthentication) { }
+    public void complete(IntegrationAuthentication integrationAuthentication) {}
 }

@@ -22,8 +22,7 @@ import java.util.Map;
 public class RemoteAuthServiceFallback implements FallbackFactory<RemoteAuthService> {
     @Override
     public RemoteAuthService create(Throwable throwable) {
-        String msg = throwable == null ? "" : throwable.getMessage();
-        log.error(msg);
+        log.error(null, throwable);
         return new RemoteAuthService() {
 
             @Override

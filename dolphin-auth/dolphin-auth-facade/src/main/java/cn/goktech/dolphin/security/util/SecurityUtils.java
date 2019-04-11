@@ -20,23 +20,9 @@ public class SecurityUtils {
     /**
      * 获取用户
      */
-    public DolUserDTO getUser(Authentication authentication) {
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof DolUserDTO) {
-            return (DolUserDTO) principal;
-        }
-        return null;
+    public static DolUserDTO getUser() {
+        return (DolUserDTO) getAuthentication().getPrincipal();
     }
 
-    /**
-     * 获取用户
-     */
-    public DolUserDTO getUser() {
-        Authentication authentication = getAuthentication();
-        if (authentication == null) {
-            return null;
-        }
-        return getUser(authentication);
-    }
 
 }

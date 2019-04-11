@@ -4,6 +4,7 @@ import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.PageRequest;
 import cn.goktech.dolphin.common.PropertyFilters;
 import cn.goktech.dolphin.common.base.BaseController;
+import cn.goktech.dolphin.security.util.SecurityUtils;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.service.IAccountService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -28,21 +29,16 @@ import java.util.List;
 @RequestMapping("/sys")
 public class UserController extends BaseController {
 
-    private final IAccountService accountService;
+    protected final IAccountService accountService;
 
     @Autowired
     public UserController(IAccountService accountService) {
         this.accountService = accountService;
     }
 
-    /**
-     * 获取用户信息接口
-     * @param
-     * @return
-     */
-    @GetMapping("/userinfo")
-    public ApiResult<User> getUserInfo(String username){
-        User user = accountService.getUserInfo(username);
+    @GetMapping("/user-info")
+    public ApiResult<User> getUserInfo(){
+        User user = accountService.getUserInfo(SecurityUtils.getUser().getUsername());
         return success(user);
     }
 

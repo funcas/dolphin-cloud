@@ -14,6 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>cn.goktech</groupId>
+            <artifactId>dolphin-common-sequence</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.goktech</groupId>
             <artifactId>dolphin-upms-facade</artifactId>
             <version>0.0.1</version>
         </dependency>

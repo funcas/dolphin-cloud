@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  * @date 2019年04月08日
  */
 @SpringCloudApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "cn.goktech.dolphin.*.feign")
 @EnableDolResourceServer
 @EnableOAuth2Client
 public class PayService {

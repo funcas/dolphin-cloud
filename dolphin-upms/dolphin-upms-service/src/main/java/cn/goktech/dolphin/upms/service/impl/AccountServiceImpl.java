@@ -259,7 +259,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if(user == null){
             throw new ServiceException("用户不存在");
         }
-        // 这样写不会走缓存，要注意
+        //todo 这样写不会走缓存，要注意
         List<Resource> resources = this.getUserResources(user.getId());
         List<String> perms = Lists.newArrayList();
         for(Resource resource : resources) {

@@ -1,4 +1,4 @@
-package cn.goktech.dolphin.pay.rest;
+package cn.goktech.dolphin.pay.feign;
 
 import cn.goktech.dolphin.common.ApiResult;
 import org.springframework.cloud.openfeign.FeignClient;

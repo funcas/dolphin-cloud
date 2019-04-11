@@ -1,10 +1,11 @@
-package cn.goktech.dolphin.security.service;
+package cn.goktech.dolphin.security.service.impl;
 
 import cn.goktech.dolphin.common.util.CollectionUtils;
 import cn.goktech.dolphin.security.authenticator.AuthenticationContext;
 import cn.goktech.dolphin.security.authenticator.IAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
 import cn.goktech.dolphin.security.entity.DolUserDTO;
+import cn.goktech.dolphin.security.service.ITokenService;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.feign.RemoteUserService;
 import com.google.common.collect.Lists;
@@ -29,9 +30,10 @@ import java.util.List;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    private RemoteUserService remoteUserService;
-    @Autowired
     private List<IAuthenticator> authenticators;
+
+    @Autowired
+    private ITokenService tokenService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,6 +45,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
         }
 
         integrationAuthentication.setUsername(username);
+        //仅允许登陆一个，开启这段代码，移除上一次生成的token
+//        tokenService.removeTokenByClientIdAndUsername(integrationAuthentication.getAuthParameter("client_id"),
+//                username);
         User remoteUser = this.authenticate(integrationAuthentication);
         if (remoteUser == null) {
             throw new UsernameNotFoundException("用户名或密码错误");

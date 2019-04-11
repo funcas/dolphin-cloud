@@ -1,6 +1,7 @@
 package cn.goktech.dolphin.upms.feign;
 
 import cn.goktech.dolphin.common.ApiResult;
+import cn.goktech.dolphin.common.constants.ServiceNameConstants;
 import cn.goktech.dolphin.upms.feign.fallback.RemoteAuthServiceFallback;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2019年04月08日
  */
-@FeignClient(value = "dolphin-auth-service")
+@FeignClient(value = ServiceNameConstants.AUTH_SERVICE, fallbackFactory = RemoteAuthServiceFallback.class)
 public interface RemoteAuthService {
 
     @PostMapping("/oauth/token")

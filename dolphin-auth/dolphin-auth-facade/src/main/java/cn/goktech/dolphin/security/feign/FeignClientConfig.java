@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 @Configuration
 @ConditionalOnClass({ Feign.class })
 @ConditionalOnProperty(value = "feign.oauth2.enabled", matchIfMissing = true)
-public class FeignCliengConfig {
+public class FeignClientConfig {
 
     @Bean
     @ConditionalOnBean(OAuth2ClientContext.class)

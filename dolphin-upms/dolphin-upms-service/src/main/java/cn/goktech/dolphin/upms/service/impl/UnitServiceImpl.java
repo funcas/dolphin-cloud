@@ -2,6 +2,7 @@ package cn.goktech.dolphin.upms.service.impl;
 
 import cn.goktech.dolphin.common.enumeration.entity.DelFlag;
 import cn.goktech.dolphin.common.sequence.IdTools;
+import cn.goktech.dolphin.security.util.SecurityUtils;
 import cn.goktech.dolphin.upms.entity.Unit;
 import cn.goktech.dolphin.upms.mapper.UnitMapper;
 import cn.goktech.dolphin.upms.service.IUnitService;
@@ -43,8 +44,7 @@ public class UnitServiceImpl implements IUnitService {
         }else{
             entity.setId(IdTools.getId());
             entity.setCtime(new Date());
-            // TODO: 2019-04-03
-//            entity.setCreatorId(VariableUtils.getPrincipal().getBaseUser().getId());
+            entity.setCreatorId(SecurityUtils.getUser().getId());
             entity.setOrgCode(this.generateOrgCode(entity.getParentId()));
             unitMapper.insert(entity);
         }

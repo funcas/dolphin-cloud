@@ -55,4 +55,36 @@
         WHERE
           code = #{code}
     </select>
+
+    <select id="getByCategoryCode" resultType="dataDictionary">
+        SELECT
+            dd.id AS "id",
+            dd.name AS "name",
+            dd.code AS "code",
+            dd.remark AS "remark",
+            dd.type AS "type",
+            dd.value AS "value",
+            dd.fk_category_id AS "fk_category_id"
+        FROM
+            tb_data_dictionary dd
+                LEFT JOIN
+            tb_dictionary_category dc ON dc.id = dd.fk_category_id
+        WHERE
+            dc.code = #{code}
+    </select>
+
+    <select id="getByCode" resultType="dataDictionary">
+        SELECT
+            id AS "id",
+            name AS "name",
+            code AS "code",
+            remark AS "remark",
+            type AS "type",
+            value AS "value",
+            fk_category_id AS "fk_category_id"
+        FROM
+            tb_data_dictionary
+        WHERE
+            code = #{code}
+    </select>
 </mapper>

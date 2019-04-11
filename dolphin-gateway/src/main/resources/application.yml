@@ -8,7 +8,20 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
+      routes:
+        - id: dolphin-upms-service
+          uri: lb://dolphin-upms-service
+          predicates:
+            - Path=/uaa/sys/**
+          filters:
+            - StripPrefix=1
+        - id: dolphin-auth-service
+          uri: lb://dolphin-auth-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
     nacos:
       discovery:
         server-addr: ${nacos}

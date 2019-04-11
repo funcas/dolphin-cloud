@@ -28,9 +28,9 @@ public class AuthFilter implements GlobalFilter, Ordered {
         logger.info("request = {}", JSON.toJSON(exchange.getRequest()));
         List<String> tkList = exchange.getRequest().getHeaders().get("Authorization");
         // TODO: 2019-04-04 判断ignore url 
-//        if(tkList == null || tkList.size() == 0) {
-//            throw new ServiceException("非法请求");
-//        }
+        if(tkList == null || tkList.size() == 0) {
+            return chain.filter(exchange);
+        }
 
         // 向headers中放文件，记得build
         ServerHttpRequest host = exchange

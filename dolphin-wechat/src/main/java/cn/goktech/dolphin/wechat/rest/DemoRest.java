@@ -21,6 +21,6 @@ public class DemoRest {
 
     @GetMapping("/demo")
     public ApiResult demo(String nickname){
-        return remoteUserService.getAllUserLists(nickname);
+        return null;
     }
 }

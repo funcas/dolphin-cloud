@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,4 +27,22 @@ public interface DataDictionaryMapper extends BaseMapper<DataDictionary> {
      * @return true 表示唯一，否则 false
      */
     boolean isCodeUnique(@Param("code") String code);
+
+    /**
+     * 获取数据字典
+     *
+     * @param code 字典类别代码
+     *
+     * @return 数据字典实体 Map
+     */
+    List<DataDictionary> getByCategoryCode(@Param("code") String code);
+
+    /**
+     * 获取数据字典
+     *
+     * @param code 字典代码
+     *
+     * @return 数据字典实体 Map
+     */
+    DataDictionary getByCode(String code);
 }

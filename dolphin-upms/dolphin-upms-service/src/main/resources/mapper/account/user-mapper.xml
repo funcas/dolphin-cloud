@@ -32,7 +32,7 @@
         <result property="username" column="username" />
         <result property="nickname" column="nickname" />
         <collection property="groups" ofType="java.lang.Long" column="id"
-                    select="com.funcas.pboot.module.upms.mapper.GroupMapper.getUserGroupListByUserId">
+                    select="cn.goktech.dolphin.upms.mapper.GroupMapper.getUserGroupListByUserId">
             <!--<id property="id" column="group_id" />-->
             <!--<result property="name" column="name" />-->
         </collection>
@@ -116,7 +116,7 @@
             tb_resource t2,
             tb_group_resource t1
         WHERE
-            t4.fk_user_id = '5' AND
+            t4.fk_user_id = #{id} AND
             t4.fk_group_id = t1.fk_group_id AND
             t2.id = t1.fk_resource_id
 	    AND t2.fk_parent_id IS NOT NULL

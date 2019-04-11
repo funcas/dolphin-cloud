@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.goktech.dolphin.security.feign.FeignCliengConfig
+cn.goktech.dolphin.security.feign.FeignClientConfig

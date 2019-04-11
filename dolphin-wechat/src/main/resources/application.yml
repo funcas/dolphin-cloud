@@ -44,4 +44,4 @@ hystrix:
 ribbon:
   eager-load:
     enabled: true
-    clients: dolphin-upms-server
+    clients: dolphin-upms-service

@@ -10,4 +10,6 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 public interface ITokenService {
 
     public boolean revokeAccessToken(OAuth2Authentication authentication);
+
+    void removeTokenByClientIdAndUsername(String clientId, String username);
 }

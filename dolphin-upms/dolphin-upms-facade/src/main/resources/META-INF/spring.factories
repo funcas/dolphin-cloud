@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.goktech.dolphin.upms.VariableUtils,\
   cn.goktech.dolphin.upms.feign.fallback.RemoteUserServiceFallback,\
   cn.goktech.dolphin.upms.feign.fallback.RemoteAuthServiceFallback

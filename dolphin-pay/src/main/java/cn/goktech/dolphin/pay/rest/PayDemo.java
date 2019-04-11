@@ -3,6 +3,8 @@ package cn.goktech.dolphin.pay.rest;
 import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.base.BaseController;
 import cn.goktech.dolphin.common.sequence.IdTools;
+import cn.goktech.dolphin.pay.feign.WechatService;
+import cn.goktech.dolphin.upms.VariableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,11 @@ public class PayDemo extends BaseController {
     @GetMapping("/getKey")
     public ApiResult<Long> getKey() {
         return success(IdTools.getId());
+    }
+
+    @GetMapping("/getDict")
+    public Object getDict(String code) {
+        return VariableUtils.getName("STATE", "1");
     }
 
 }

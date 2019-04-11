@@ -62,7 +62,7 @@ public class SystemVariableServiceImpl implements ISystemVariableService {
     @Override
     @Cacheable(value = "dataDictionaryCache", key = "#code")
     public DataDictionary getDataDictionary(String code) {
-        return dataDictionaryMapper.selectOne(new QueryWrapper<DataDictionary>().eq("code", code));
+        return dataDictionaryMapper.getByCode(code);
     }
 
     /**
@@ -75,8 +75,7 @@ public class SystemVariableServiceImpl implements ISystemVariableService {
     @Override
     @Cacheable(value = "dataDictionaryCache", key = "#code")
     public List<DataDictionary> getDataDictionaries(String code) {
-        return dataDictionaryMapper
-                .selectList(new QueryWrapper<DataDictionary>().eq("fk_category_id", code));
+        return dataDictionaryMapper.getByCategoryCode(code);
     }
 
     /**

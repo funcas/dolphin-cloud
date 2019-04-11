@@ -1,6 +1,6 @@
 package cn.goktech.dolphin.security.conf;
 
-import cn.goktech.dolphin.security.service.UserDetailServiceImpl;
+import cn.goktech.dolphin.security.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,11 +40,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
     @Autowired
-    private RedisConnectionFactory connectionFactory;
-    @Autowired
     private DataSource dataSource;
     @Autowired
     private UserDetailServiceImpl userDetailService;
+    @Autowired
+    private RedisTokenStore tokenStore;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -53,7 +54,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         // 配置token的存储方式为JwtTokenStore
-        endpoints.tokenStore(tokenStore())
+        endpoints.tokenStore(tokenStore)
                 .accessTokenConverter(jwtAccessTokenConverter())
                 // refresh token 需要
                 .userDetailsService(userDetailService)
@@ -69,7 +70,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .allowFormAuthenticationForClients()
+                .allowFormAuthenticationForClients() //允许不使用http basic认证
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
     }
@@ -83,14 +84,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setTokenEnhancer(jwtAccessTokenConverter());
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setReuseRefreshToken(false);
-        tokenServices.setTokenStore(tokenStore());
+        tokenServices.setTokenStore(tokenStore);
         return tokenServices;
     }
 
-    @Bean
-    public RedisTokenStore tokenStore() {
-        return new RedisTokenStore(connectionFactory);
-    }
 
     /**
      * 使用非对称加密算法来对Token进行签名
