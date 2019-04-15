@@ -43,11 +43,13 @@ hystrix:
 # hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000
 
 # 防止第一次调用超时，使用eagerLoad模式
-ribbon:
-  eager-load:
-    enabled: true
-    clients: dolphin-upms-service
+#ribbon:
+#  eager-load:
+#    enabled: true
+#    clients: dolphin-upms-service
 
 seq:
   zkAddr: 192.168.2.218:2181
   distribute: false
+
+

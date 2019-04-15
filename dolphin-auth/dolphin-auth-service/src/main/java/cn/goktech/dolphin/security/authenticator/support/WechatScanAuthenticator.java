@@ -1,6 +1,6 @@
 package cn.goktech.dolphin.security.authenticator.support;
 
-import cn.goktech.dolphin.security.authenticator.AbstractPreparableAuthenticator;
+import cn.goktech.dolphin.security.authenticator.AbstractAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
 import cn.goktech.dolphin.upms.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Slf4j
 //@Component
-public class WechatScanAuthenticator extends AbstractPreparableAuthenticator {
+public class WechatScanAuthenticator extends AbstractAuthenticator {
 
     private final static String VERIFICATION_CODE_AUTH_TYPE = "wx_scan";
 

@@ -7,7 +7,7 @@ import cn.goktech.dolphin.upms.entity.User;
  * @version 1.0
  * @date 2018年11月28日
  */
-public abstract class AbstractPreparableAuthenticator implements IAuthenticator {
+public abstract class AbstractAuthenticator implements IAuthenticator {
 
     @Override
     public abstract User authenticate(IntegrationAuthentication integrationAuthentication);
