@@ -43,7 +43,6 @@ oss:
   url-prefix: 绑定的域名（七牛使用）阿里可以与endpoint相同
   if-private: 是否公开权限
   endpoint: 阿里专用，对应oss的区域域名
-  url-prefix: 一般与endpoint相同
   internal-url: 内网访问地址 (可选)
 
 ```

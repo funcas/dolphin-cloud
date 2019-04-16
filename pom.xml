@@ -15,6 +15,8 @@
         <module>dolphin-wechat</module>
         <module>dolphin-oss</module>
         <module>dolphin-pay</module>
+        <module>dolphin-scheduler</module>
+        <module>dolphin-concurrent</module>
     </modules>
 
     <packaging>pom</packaging>
