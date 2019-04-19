@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 9004
 spring:
   application:
     name: dolphin-pay-service
@@ -48,8 +48,11 @@ hystrix:
 #    enabled: true
 #    clients: dolphin-upms-service
 
-seq:
-  zkAddr: 192.168.2.218:2181
-  distribute: false
-
-
+#seq:
+#  zkAddr: 192.168.2.218:2181
+#  distribute: false
+elastic:
+  job:
+    zk:
+      server-lists: 192.168.2.218:2181
+      namespace: pay-job

@@ -15,8 +15,8 @@
         <module>dolphin-wechat</module>
         <module>dolphin-oss</module>
         <module>dolphin-pay</module>
-        <module>dolphin-scheduler</module>
         <module>dolphin-concurrent</module>
+        <module>dolphin-schedule</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -50,7 +50,7 @@
         <protostuff.version>1.6.0</protostuff.version>
         <activiti.version>6.0.0</activiti.version>
         <httpclient.version>4.5.3</httpclient.version>
-        <curator.version>2.6.0</curator.version>
+        <curator.version>2.11.1</curator.version>
     </properties>
 
     <repositories>
@@ -276,6 +276,11 @@
                         <groupId>log4j</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

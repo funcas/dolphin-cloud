@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>dolphin-concurrent-lock</module>
-        <module>dolphin-concurrent-job</module>
     </modules>
 
 
