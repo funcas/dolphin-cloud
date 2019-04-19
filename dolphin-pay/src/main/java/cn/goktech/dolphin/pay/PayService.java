@@ -1,11 +1,9 @@
 package cn.goktech.dolphin.pay;
 
-import cn.goktech.dolphin.schedule.annotation.EnableElasticJob;
 import cn.goktech.dolphin.security.annotation.EnableDolResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 /**
