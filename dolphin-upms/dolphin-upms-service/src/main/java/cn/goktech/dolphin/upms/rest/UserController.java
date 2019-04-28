@@ -39,6 +39,7 @@ public class UserController extends BaseController {
     @GetMapping("/user-info")
     public ApiResult<User> getUserInfo(){
         User user = accountService.getUserInfo(SecurityUtils.getUser().getUsername());
+        user.setPassword(null);
         return success(user);
     }
 

@@ -5,13 +5,16 @@ import cn.goktech.dolphin.common.enumeration.entity.ResourceType;
 import cn.goktech.dolphin.common.exception.ServiceException;
 import cn.goktech.dolphin.common.sequence.IdTools;
 import cn.goktech.dolphin.common.util.CollectionUtils;
-import cn.goktech.dolphin.upms.entity.Group;
-import cn.goktech.dolphin.upms.entity.Resource;
-import cn.goktech.dolphin.upms.entity.User;
+import cn.goktech.dolphin.security.constants.AuthConstants;
+import cn.goktech.dolphin.security.util.SecurityUtils;
+import cn.goktech.dolphin.upms.VariableUtils;
+import cn.goktech.dolphin.upms.entity.*;
 import cn.goktech.dolphin.upms.mapper.GroupMapper;
 import cn.goktech.dolphin.upms.mapper.ResourceMapper;
 import cn.goktech.dolphin.upms.mapper.UserMapper;
+import cn.goktech.dolphin.upms.service.BaseBizService;
 import cn.goktech.dolphin.upms.service.IAccountService;
+import cn.goktech.dolphin.upms.service.IUnitService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -40,6 +43,9 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
     private final GroupMapper groupMapper;
     private final ResourceMapper resourceMapper;
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private IUnitService unitService;
 
     @Autowired
     public AccountServiceImpl(UserMapper userMapper, GroupMapper groupMapper, ResourceMapper resourceMapper, PasswordEncoder passwordEncoder) {
@@ -84,7 +90,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
             throw new ServiceException("登录账户[" + entity.getUsername() + "]已存在");
         }
 
-        String encryptPassword = passwordEncoder.encode(entity.getPassword());
+        String encryptPassword = AuthConstants.AUTH_TYPE + passwordEncoder.encode(entity.getPassword());
         entity.setPassword(encryptPassword);
         entity.setId(IdTools.getId());
         userMapper.insert(entity);
@@ -105,7 +111,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
 
         Long id = entity.getId();
         if(entity.getPassword() != null && !"".equals(entity.getPassword())) {
-            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+            entity.setPassword(AuthConstants.AUTH_TYPE + passwordEncoder.encode(entity.getPassword()));
         }
         userMapper.updateById(entity);
 
@@ -134,7 +140,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if (StringUtils.isEmpty(newPassword)) {
             throw new ServiceException("新密码不能为空");
         }
-        userMapper.updatePassword(entity.getId(), passwordEncoder.encode(newPassword));
+        userMapper.updatePassword(entity.getId(), AuthConstants.AUTH_TYPE + passwordEncoder.encode(newPassword));
     }
 
 
@@ -174,6 +180,18 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
     }
 
 
+    private boolean isSuperAdmin(Long id) {
+        DataDictionary data = VariableUtils.getDataDictionary("SYSTEM_VAR_ROLE_ID");
+        List<Group> groups = getUserGroups(id);
+
+        for (Group g : groups) {
+            if (VariableUtils.cast(data.getValue(),Long.class).equals(g.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * 删除用户
      *
@@ -181,20 +199,15 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
      */
     @Override
     public void deleteUser(User entity) {
-//        DataDictionary data = VariableUtils.getDataDictionary("SYSTEM_VAR_ROLE_ID");
-//
-//        Long id = entity.getId();
-//
-//        List<Group> groups = getUserGroups(id);
-//
-//        for (Group g : groups) {
-//            if (g.getId().equals(VariableUtils.cast(data.getValue(),Long.class))) {
-//                throw new ServiceException("这是管理员帐号，不允许删除");
-//            }
-//        }
-//
-//        userMapper.deleteGroupAssociation(id);
-//        userMapper.deleteById(id);
+
+        Long id = entity.getId();
+
+        if (isSuperAdmin(id)) {
+            throw new ServiceException("这是管理员帐号，不允许删除");
+        }
+
+        userMapper.deleteGroupAssociation(id);
+        userMapper.deleteById(id);
     }
 
     /**
@@ -243,8 +256,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
      */
     @Override
     public IPage<User> findUsers(PageRequest pageRequest, Map<String, Object> filter) {
-//        String sql = dataScopeFilter("tb_user");
-//        filter.put("ds", sql);
+        processDataScopeFilter(filter, User.BIZ_ALIAS);
         return userMapper.find(new Page<>(pageRequest.getPageNumber(), pageRequest.getPageSize()), filter);
     }
 
@@ -268,6 +280,10 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
             }
         }
         user.setPerms(perms);
+        Unit unit = unitService.selectOne(user.getUnitId());
+        System.out.println(unit.getId());
+        user.setOrganization(unit);
+        user.setGroups(this.getUserGroups(user.getId()));
         return user;
     }
 
@@ -367,7 +383,7 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         if (!isGroupNameUnique(name)) {
             throw new ServiceException("组名称[" + name + "]已存在");
         }
-
+        entity.setUnitId(((Unit)SecurityUtils.getUser().getUnit()).getId());
         groupMapper.insert(entity);
         Long id = entity.getId();
 
@@ -400,6 +416,10 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
      */
     @Override
     public IPage<Group> findGroups(PageRequest pageRequest, Map<String,Object> filter) {
+        processDataScopeFilter(filter, Group.GROUP_ALIAS);
+        if (isSuperAdmin()) {
+            filter.put("superAdmin", "1");
+        }
         return groupMapper.find(new Page<>(pageRequest.getPageNumber(),pageRequest.getPageSize()), filter);
     }
 

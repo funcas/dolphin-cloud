@@ -3,6 +3,7 @@ package cn.goktech.dolphin.security.authenticator.support;
 import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.security.authenticator.AbstractAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
+import cn.goktech.dolphin.upms.entity.Unit;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.feign.RemoteUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -24,8 +25,8 @@ public class UsernamePasswordAuthenticator extends AbstractAuthenticator {
 
     @Override
     public User authenticate(IntegrationAuthentication integrationAuthentication) {
-        ApiResult<User> result = remoteUserService.getUserInfo(integrationAuthentication.getUsername());
-        return result.getResult();
+        User result = remoteUserService.getUserInfo(integrationAuthentication.getUsername());
+        return result;
     }
 
     @Override

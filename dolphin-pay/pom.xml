@@ -18,6 +18,16 @@
             <artifactId>dolphin-upms-facade</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>cn.goktech</groupId>
+            <artifactId>dolphin-oss</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.0.0, 7.2.99]</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>cn.goktech</groupId>-->
             <!--<artifactId>dolphin-common-sequence</artifactId>-->

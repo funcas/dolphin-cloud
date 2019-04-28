@@ -8,7 +8,6 @@
             id AS "id",
             email AS "email",
             nickname AS "nickname",
-            password AS "password",
             state AS "state",
             sex,
             phone,
@@ -39,7 +38,19 @@
     </resultMap>
     <select id="getByUsername" resultType="user">
         SELECT
-          <include refid="select_field" />
+            id AS "id",
+            email AS "email",
+            nickname AS "nickname",
+            password AS "password",
+            state AS "state",
+            sex,
+            phone,
+            birthday,
+            avatar,
+            address,
+            username AS "username",
+            unit_id unitId,
+            ctime
         FROM
             tb_user
         WHERE

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author funcas
@@ -24,5 +25,7 @@ public interface UnitMapper extends BaseMapper<Unit> {
     List<Unit> selectGroupUnit(@Param("groupId") Long groupId);
 
     public List<String> getCheckedUnitsByGroupId(@Param("groupId") Long groupId);
+
+    public List<Unit> getUnits(@Param("filter") Map<String, Object> filter);
 
 }

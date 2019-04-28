@@ -1,5 +1,7 @@
 package cn.goktech.dolphin.pay;
 
+import cn.goktech.dolphin.oss.enumeration.Provider;
+import cn.goktech.dolphin.oss.spring.annotation.EnableOssClient;
 import cn.goktech.dolphin.security.annotation.EnableDolResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
@@ -15,6 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableFeignClients(basePackages = "cn.goktech.dolphin.*.feign")
 @EnableDolResourceServer
 @EnableOAuth2Client
+@EnableOssClient(provider = Provider.QINIU_OSS)
 //@ComponentScan(basePackages = {"cn.goktech.dolphin.pay"})
 public class PayService {
 

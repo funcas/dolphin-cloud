@@ -32,8 +32,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private List<IAuthenticator> authenticators;
 
-    @Autowired
-    private ITokenService tokenService;
+//    @Autowired
+//    private ITokenService tokenService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -61,7 +61,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         }
 
         return new DolUserDTO(remoteUser.getUsername(), remoteUser.getPassword(), grantedAuthorities,
-                remoteUser.getId(), remoteUser.getUnitId(), remoteUser.getOpenid());
+                remoteUser.getId(), remoteUser.getOrganization(), remoteUser.getOpenid(), remoteUser.getGroups());
 
     }
 

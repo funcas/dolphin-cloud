@@ -10,7 +10,7 @@ spring:
     name: dolphin-auth-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/platform?useSSL=false
+    url: jdbc:mysql://localhost:3306/dolphin-base?useSSL=false
     username: root
     password: P@ssw0rd
   redis:

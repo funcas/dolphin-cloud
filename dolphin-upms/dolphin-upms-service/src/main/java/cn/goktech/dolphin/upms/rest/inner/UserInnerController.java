@@ -27,9 +27,8 @@ public class UserInnerController extends UserController {
      * @return
      */
     @GetMapping("/userinfo")
-    public ApiResult<User> getUserInfo(String username){
-        User user = accountService.getUserInfo(username);
-        return success(user);
+    public User getUserInfo(String username){
+       return accountService.getUserInfo(username);
     }
 
 }

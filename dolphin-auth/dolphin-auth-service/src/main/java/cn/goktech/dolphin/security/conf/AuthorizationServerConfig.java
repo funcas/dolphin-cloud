@@ -79,7 +79,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Primary
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2));
+        // TODO: 2019-04-22 调试方便，增长时间
+        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30));
         tokenServices.setRefreshTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(7));
         tokenServices.setTokenEnhancer(jwtAccessTokenConverter());
         tokenServices.setSupportRefreshToken(true);

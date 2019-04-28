@@ -23,7 +23,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class User extends BaseEntity<Long> {
-
+    public static final String BIZ_ALIAS = "tb_user";
     private static final long serialVersionUID = -2269302169894751895L;
     @Length(max = 64)
     @Email

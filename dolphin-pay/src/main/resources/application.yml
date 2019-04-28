@@ -51,8 +51,10 @@ hystrix:
 #seq:
 #  zkAddr: 192.168.2.218:2181
 #  distribute: false
-elastic:
-  job:
-    zk:
-      server-lists: 192.168.2.218:2181
-      namespace: pay-job
+
+oss:
+  accessKey: Qe7K1YARzkBDD7YVb-oJNAxfv_aROOMguGm-Ao68
+  secretKey: MxBjigH0gp70O-w3aL9UyeL2b71w0O-jRdo7BX7F
+  bucketName: demo
+  url-prefix: http://pqggx15u6.bkt.clouddn.com
+  if-private: false

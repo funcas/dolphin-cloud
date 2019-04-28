@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/sys")
 public class UnitController extends BaseController {
 
-    private final IUnitService unitService;
+    protected final IUnitService unitService;
 
     @Autowired
     public UnitController(IUnitService unitService) {
@@ -85,5 +85,14 @@ public class UnitController extends BaseController {
     @GetMapping("/unit/checked")
     public ApiResult getCheckedUnit(@RequestParam("id") Long groupId) {
         return success(unitService.getCheckedUnitsByGroupId(groupId));
+    }
+
+    /**
+     * 根据数据权限获取组织机构
+     * @return
+     */
+    @GetMapping("/unit/ds")
+    public ApiResult getUnitsByDataScope(@RequestParam("groupId") Long groupId) {
+        return success(unitService.getUnitByDataScope(groupId));
     }
 }

@@ -3,6 +3,7 @@ package cn.goktech.dolphin.upms.feign.fallback;
 import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.enumeration.ApiResultEnum;
 import cn.goktech.dolphin.upms.entity.DataDictionary;
+import cn.goktech.dolphin.upms.entity.Unit;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.feign.RemoteUserService;
 import com.google.common.collect.Lists;
@@ -27,12 +28,8 @@ public class RemoteUserServiceFallback implements FallbackFactory<RemoteUserServ
         return new RemoteUserService() {
 
             @Override
-            public ApiResult<User> getUserInfo(String username) {
-                return ApiResult.<User>builder()
-                        .retCode(ApiResultEnum.UNKNOWN_EXCEPTION.getValue())
-                        .result(new User())
-                        .retMessage(ERR_MSG)
-                        .build();
+            public User getUserInfo(String username) {
+                return new User();
             }
 
             @Override
@@ -51,6 +48,11 @@ public class RemoteUserServiceFallback implements FallbackFactory<RemoteUserServ
                         .result(new DataDictionary())
                         .retMessage(ERR_MSG)
                         .build();
+            }
+
+            @Override
+            public Unit getUnitById(Long id) {
+                return new Unit();
             }
         };
 

@@ -22,6 +22,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Unit extends BaseEntity<Long> {
+    public static final String ALIAS = "tb_unit";
     private static final long serialVersionUID = -2746111197872170173L;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
@@ -32,6 +33,7 @@ public class Unit extends BaseEntity<Long> {
 
     private Integer sort;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long master;
     @Length(max = 16)
     private String phone;
@@ -61,10 +63,6 @@ public class Unit extends BaseEntity<Long> {
 
     public String getLabel() {
         return this.name;
-    }
-
-    public Boolean getChecked() {
-        return (leafCount != null && leafCount == 0 && this.checked);
     }
 
     public Boolean isLeaf() {

@@ -13,11 +13,13 @@ spring cloud 脚手架，具有统一授权、认证后台管理系统，其中�
 |   +-- dolphin-auth-facade     【认证中心对外接口包】
 |   +-- dolphin-auth-service    【认证中心核心服务 :9000】
 +-- dolphin-common              【通用工具包】
++-- dolphin-concurrent          【并发相关工具包】
 +-- dolphin-gateway             【网关服务 :7400】
++-- dolphin-oss                 【OSS工具包】
 +-- dolphin-upms                【用户权限模块】
 |   +-- dolphin-upms-facade     【用户权限对外接口包】
 |   +-- dolphin-upms-service    【用户权限核心服务 :9001】
-
++-- dolphin-schedule            【elastic-job工具包】
 ```
 
 #### todo list
