@@ -4,6 +4,8 @@ import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.PageRequest;
 import cn.goktech.dolphin.common.PropertyFilters;
 import cn.goktech.dolphin.common.base.BaseController;
+import cn.goktech.dolphin.common.enumeration.FieldType;
+import cn.goktech.dolphin.upms.VariableUtils;
 import cn.goktech.dolphin.upms.entity.DataDictionary;
 import cn.goktech.dolphin.upms.service.ISystemVariableService;
 import com.google.common.collect.Lists;
@@ -46,8 +48,8 @@ public class DataDictionaryController extends BaseController {
 
     @GetMapping("/field-types")
     public Object getFieldTypes() {
-//        return success(VariableUtils.get(FieldType.class));
-        return null;
+        return success(VariableUtils.get(FieldType.class));
+//        return null;
     }
 
     /**

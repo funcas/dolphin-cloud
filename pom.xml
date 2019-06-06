@@ -338,6 +338,7 @@
                 <gok-env>dev</gok-env>
                 <nacos>192.168.2.218:8848</nacos>
                 <redis>192.168.2.218</redis>
+                <redis-port>6380</redis-port>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>

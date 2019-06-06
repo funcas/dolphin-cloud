@@ -18,7 +18,7 @@ import java.util.List;
  * @version 1.0
  * @date 2019年04月03日
  */
-@FeignClient(value = ServiceNameConstants.UPMS_SERVICE)
+@FeignClient(value = ServiceNameConstants.UPMS_SERVICE, fallbackFactory = RemoteUserServiceFallback.class)
 public interface RemoteUserService {
 
     @GetMapping("/inner/userinfo")

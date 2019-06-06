@@ -2,6 +2,8 @@ package cn.goktech.dolphin.upms.entity;
 
 
 import cn.goktech.dolphin.common.BaseEntity;
+import cn.goktech.dolphin.common.enumeration.entity.State;
+import cn.goktech.dolphin.upms.VariableUtils;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -59,7 +61,7 @@ public class User extends BaseEntity<Long> {
 
 //    private transient Set<GrantedAuthority> grantedAuthorities;
 
-//    public String getStateName() {
-//        return VariableUtils.getName(State.class, this.getState());
-//    }
+    public String getStateName() {
+        return VariableUtils.getName(State.class, this.getState());
+    }
 }

@@ -3,7 +3,7 @@
 ```
 spring cloud 脚手架，具有统一授权、认证后台管理系统，其中包含具备用户管理、资源权限管理、网关API 管理等多个模块，支持多业务系统并行开发，
 可以作为后端服务的开发脚手架。核心技术采用Spring Boot 2.1.3以及Spring Cloud (Greenwich.RELEASE) 相关核心组件，采用Nacos注册和配置
-中心，集成流量卫兵Sentine（待整合，官方尚未完全支持Spring Cloud Gateway）
+中心，集成流量卫兵sentinel（待整合，官方尚未完全支持Spring Cloud Gateway）
 
 ```
 

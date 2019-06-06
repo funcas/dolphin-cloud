@@ -15,7 +15,7 @@ spring:
     password: P@ssw0rd
   redis:
     host: ${redis}
-    port: 6379
+    port: ${redis-port}
   cloud:
     nacos:
       discovery:
@@ -32,5 +32,9 @@ mybatis-plus:
 feign:
   hystrix:
     enabled: true
+
+ignore:
+  urls:
+    - /actuator/**
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
