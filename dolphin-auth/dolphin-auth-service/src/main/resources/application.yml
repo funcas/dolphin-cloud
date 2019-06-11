@@ -48,8 +48,8 @@ feign:
   client:
     config:
       default:
-        readTimeout: 10000
-        connectTimeout: 10000
+        readTimeout: 5000
+        connectTimeout: 1000
   sentinel:
     enabled: true
 
@@ -59,3 +59,4 @@ ignore:
     - /demo
 
 #hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+

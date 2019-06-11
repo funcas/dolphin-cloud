@@ -10,6 +10,7 @@ spring:
     password: P@ssw0rd
     hikari:
       transaction-isolation: TRANSACTION_READ_COMMITTED
+  redis:
     host: ${redis}
     port: ${redis-port}
   cloud:
