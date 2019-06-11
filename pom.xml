@@ -289,6 +289,12 @@
                 <version>1.6.1</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>[3.4.14,)</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
