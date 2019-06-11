@@ -1,6 +1,7 @@
 package cn.goktech.dolphin.gateway;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @version 1.0
  * @date 2019年04月04日
  */
-@SpringCloudApplication
+@SpringBootApplication
 public class GatewayService {
 
     public static void main(String[] args) {

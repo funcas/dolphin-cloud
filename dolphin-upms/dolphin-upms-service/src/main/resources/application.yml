@@ -10,13 +10,25 @@ spring:
     password: P@ssw0rd
     hikari:
       transaction-isolation: TRANSACTION_READ_COMMITTED
-  redis:
     host: ${redis}
     port: ${redis-port}
   cloud:
     nacos:
       discovery:
-        server-addr: ${nacos}
+        server-addr: ${nacos-addr}
+    sentinel:
+      transport:
+        port: ${sentinel-port}
+        dashboard: ${sentinel-dashboard}
+#      datasource:
+#        ds0:
+#          nacos:
+#            rule-type: degrade
+#            data-type: json
+#            server-addr: ${nacos-addr}
+#            dataId: ${spring.application.name}-degrade-rules
+#            groupId: DEFAULT_GROUP
+
   profiles:
     active: ${gok-env}
 
@@ -28,17 +40,11 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 
-client:
-  appid: app
-  secret: app
-
 ignore:
   urls:
     - /actuator/**
     - /demo/**
     - /inner/**
-    - /sys/login
-    - /sys/logout
 
 feign:
   client:
@@ -46,13 +52,14 @@ feign:
       default:
         readTimeout: 10000
         connectTimeout: 10000
-  hystrix:
+  sentinel:
     enabled: true
 
-hystrix:
-  shareSecurityContext: true
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+#hystrix:
+#  shareSecurityContext: true
+
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
 
 seq:
   zkAddr: 192.168.2.218:2181

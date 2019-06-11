@@ -281,7 +281,6 @@ public class AccountServiceImpl extends BaseBizService implements IAccountServic
         }
         user.setPerms(perms);
         Unit unit = unitService.selectOne(user.getUnitId());
-        System.out.println(unit.getId());
         user.setOrganization(unit);
         user.setGroups(this.getUserGroups(user.getId()));
         return user;

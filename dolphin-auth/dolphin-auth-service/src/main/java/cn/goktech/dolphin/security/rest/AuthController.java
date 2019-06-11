@@ -4,6 +4,7 @@ import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.base.BaseController;
 import cn.goktech.dolphin.security.service.ITokenService;
 import cn.goktech.dolphin.security.util.SecurityUtils;
+import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -14,6 +15,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,5 +82,12 @@ public class AuthController extends BaseController {
         String url = request.getScheme() + "://" + request.getRemoteAddr() + ":" + request.getServerPort() + "/oauth/token";
         ResponseEntity<OAuth2AccessToken> ret = restTemplate.postForEntity(url, req, OAuth2AccessToken.class);
         return success(ret.getBody());
+    }
+
+
+    @GetMapping("/demo")
+    public ApiResult getDemo(){
+        System.out.println(System.currentTimeMillis());
+        return success(ImmutableMap.of("a","funcas"));
     }
 }

@@ -15,6 +15,7 @@ public enum ApiResultEnum implements ValueEnum<String> {
     NO_RECORD("010","没有找到相关记录"),
     SERVICE_EXCEPTION("500", "服务运行异常"),
     UNKNOWN_EXCEPTION("900", "未知服务运行异常"),
+    BAD_GATEWAY("502", "流量管制"),
     FAILURE("999","未知服务异常");
 
     private String name;

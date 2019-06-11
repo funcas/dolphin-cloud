@@ -24,12 +24,12 @@ public class RemoteUserServiceFallback implements FallbackFactory<RemoteUserServ
 
     @Override
     public RemoteUserService create(Throwable throwable) {
-        log.error(null, throwable);
+        log.error(throwable.getMessage());
         return new RemoteUserService() {
 
             @Override
             public User getUserInfo(String username) {
-                return new User();
+                return null;
             }
 
             @Override

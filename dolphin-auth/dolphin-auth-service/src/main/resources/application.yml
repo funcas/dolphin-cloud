@@ -1,9 +1,9 @@
 server:
   undertow:
     io-threads: 4
-#    worker-threads: 32
-#    buffer-size: 1024
-#    direct-buffers: true
+    worker-threads: 256
+    buffer-size: 1024
+    direct-buffers: true
   port: 9000
 spring:
   application:
@@ -19,9 +19,23 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${nacos}
+        server-addr: ${nacos-addr}
+    sentinel:
+      transport:
+        port: ${sentinel-port}
+        dashboard: ${sentinel-dashboard}
+#      datasource:
+#        ds0:
+#          nacos:
+#            rule-type: flow
+#            data-type: json
+#            server-addr: ${nacos-addr}
+#            dataId: ${spring.application.name}-flow-rules
+#            groupId: DEFAULT_GROUP
+
   profiles:
     active: ${gok-env}
+
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*/*-mapper.xml
@@ -29,12 +43,19 @@ mybatis-plus:
   configuration:
     log-prefix: dao.
     map-underscore-to-camel-case: true
+
 feign:
-  hystrix:
+  client:
+    config:
+      default:
+        readTimeout: 10000
+        connectTimeout: 10000
+  sentinel:
     enabled: true
 
 ignore:
   urls:
     - /actuator/**
+    - /demo
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000

@@ -12,11 +12,15 @@ spring:
       transaction-isolation: TRANSACTION_READ_COMMITTED
   redis:
     host: ${redis}
-    port: 6379
+    port: ${redis-port}
   cloud:
     nacos:
       discovery:
-        server-addr: ${nacos}
+        server-addr: ${nacos-addr}
+    sentinel:
+      transport:
+        port: ${sentinel-port}
+        dashboard: ${sentinel-dashboard}
   profiles:
     active: ${gok-env}
 
@@ -33,11 +37,11 @@ ignore:
     - /pay/**
 
 feign:
-  hystrix:
+  sentinel:
     enabled: true
 
-hystrix:
-  shareSecurityContext: true
+#hystrix:
+#  shareSecurityContext: true
 
 
 # hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000

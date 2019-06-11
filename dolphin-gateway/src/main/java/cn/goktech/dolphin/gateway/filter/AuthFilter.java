@@ -25,7 +25,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        logger.info("request = {}", JSON.toJSON(exchange.getRequest()));
+//        logger.info("request = {}", JSON.toJSON(exchange.getRequest()));
         List<String> tkList = exchange.getRequest().getHeaders().get("Authorization");
         // TODO: 2019-04-04 判断ignore url 
         if(tkList == null || tkList.size() == 0) {

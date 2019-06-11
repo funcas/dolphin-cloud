@@ -1,5 +1,10 @@
 server:
   port: 7400
+  undertow:
+    io-threads: 4
+    worker-threads: 256
+    buffer-size: 1024
+    direct-buffers: true
 
 spring:
   application:
@@ -24,10 +29,14 @@ spring:
             - StripPrefix=1
     nacos:
       discovery:
-        server-addr: ${nacos}
+        server-addr: ${nacos-addr}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
 
 feign:
-  hystrix:
+  sentinel:
     enabled: true
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000

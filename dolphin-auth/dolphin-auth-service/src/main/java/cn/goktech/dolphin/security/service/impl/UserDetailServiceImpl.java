@@ -1,6 +1,7 @@
 package cn.goktech.dolphin.security.service.impl;
 
 import cn.goktech.dolphin.common.util.CollectionUtils;
+import cn.goktech.dolphin.common.util.FastJsonUtil;
 import cn.goktech.dolphin.security.authenticator.AuthenticationContext;
 import cn.goktech.dolphin.security.authenticator.IAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
@@ -50,9 +51,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 //                username);
         User remoteUser = this.authenticate(integrationAuthentication);
         if (remoteUser == null) {
+            log.error("用户名密码不正确！");
             throw new UsernameNotFoundException("用户名或密码错误");
         }
-
         List<GrantedAuthority> grantedAuthorities = Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(remoteUser.getPerms())) {
             for (String perm : remoteUser.getPerms()) {
