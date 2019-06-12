@@ -1,9 +1,7 @@
 package cn.goktech.dolphin.security.authenticator.support;
 
-import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.security.authenticator.AbstractAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
-import cn.goktech.dolphin.upms.entity.Unit;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.feign.RemoteUserService;
 import org.apache.commons.lang3.StringUtils;

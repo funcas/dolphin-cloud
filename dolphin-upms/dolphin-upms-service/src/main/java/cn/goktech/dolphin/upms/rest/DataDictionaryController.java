@@ -1,6 +1,5 @@
 package cn.goktech.dolphin.upms.rest;
 
-import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.common.PageRequest;
 import cn.goktech.dolphin.common.PropertyFilters;
 import cn.goktech.dolphin.common.base.BaseController;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 数据字典管理

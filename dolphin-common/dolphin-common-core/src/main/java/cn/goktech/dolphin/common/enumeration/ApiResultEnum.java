@@ -11,6 +11,7 @@ public enum ApiResultEnum implements ValueEnum<String> {
     VALIDATION_FAILURE("001","校验不通过"),
     ACL_FAILURE("002","用户名或密码不正确"),
     NO_RESPONSE("003","无应答"),
+    TOKEN_INVALID("004", "令牌无效"),
     UNAUTHORIZED("007","未授权"),
     NO_RECORD("010","没有找到相关记录"),
     SERVICE_EXCEPTION("500", "服务运行异常"),

@@ -1,6 +1,5 @@
 package cn.goktech.dolphin.gateway.conf;
 
-import cn.goktech.dolphin.gateway.exception.SentinelExceptionHandler;
 import com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiPathPredicateItem;

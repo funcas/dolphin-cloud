@@ -1,6 +1,5 @@
 package cn.goktech.dolphin.upms.rest.inner;
 
-import cn.goktech.dolphin.common.ApiResult;
 import cn.goktech.dolphin.upms.entity.User;
 import cn.goktech.dolphin.upms.rest.UserController;
 import cn.goktech.dolphin.upms.service.IAccountService;

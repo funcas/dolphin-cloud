@@ -7,7 +7,6 @@ import cn.goktech.dolphin.upms.entity.DictionaryCategory;
 import cn.goktech.dolphin.upms.mapper.DataDictionaryMapper;
 import cn.goktech.dolphin.upms.mapper.DictionaryCategoryMapper;
 import cn.goktech.dolphin.upms.service.ISystemVariableService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.collections.CollectionUtils;

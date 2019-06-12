@@ -3,7 +3,6 @@ package cn.goktech.dolphin.upms.service.impl;
 import cn.goktech.dolphin.common.enumeration.entity.DelFlag;
 import cn.goktech.dolphin.common.sequence.IdTools;
 import cn.goktech.dolphin.security.util.SecurityUtils;
-import cn.goktech.dolphin.upms.entity.Group;
 import cn.goktech.dolphin.upms.entity.Unit;
 import cn.goktech.dolphin.upms.mapper.UnitMapper;
 import cn.goktech.dolphin.upms.service.BaseBizService;
@@ -12,12 +11,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author funcas

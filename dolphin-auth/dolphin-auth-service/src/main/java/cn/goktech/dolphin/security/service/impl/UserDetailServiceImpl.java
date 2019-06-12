@@ -1,14 +1,12 @@
 package cn.goktech.dolphin.security.service.impl;
 
+import cn.goktech.dolphin.common.exception.SystemException;
 import cn.goktech.dolphin.common.util.CollectionUtils;
-import cn.goktech.dolphin.common.util.FastJsonUtil;
 import cn.goktech.dolphin.security.authenticator.AuthenticationContext;
 import cn.goktech.dolphin.security.authenticator.IAuthenticator;
 import cn.goktech.dolphin.security.authenticator.IntegrationAuthentication;
 import cn.goktech.dolphin.security.entity.DolUserDTO;
-import cn.goktech.dolphin.security.service.ITokenService;
 import cn.goktech.dolphin.upms.entity.User;
-import cn.goktech.dolphin.upms.feign.RemoteUserService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +50,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         User remoteUser = this.authenticate(integrationAuthentication);
         if (remoteUser == null) {
             log.error("用户名密码不正确！");
-            throw new UsernameNotFoundException("用户名或密码错误");
+            throw new SystemException("用户名或密码错误");
         }
         List<GrantedAuthority> grantedAuthorities = Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(remoteUser.getPerms())) {

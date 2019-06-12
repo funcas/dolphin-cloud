@@ -18,6 +18,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private TokenStore tokenStore;
 
     @Autowired
+    private AuthExceptionEntryPoint authExceptionEntryPoint;
+
+    @Autowired
+    private DolAccessDeniedHandler dolAccessDeniedHandler;
+
+    @Autowired
     private FilterIgnorePropertiesConfig ignorePropertiesConfig;
 
     @Override
@@ -36,6 +42,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.tokenStore(tokenStore);
+        resources.authenticationEntryPoint(authExceptionEntryPoint).accessDeniedHandler(dolAccessDeniedHandler);
     }
 
 }

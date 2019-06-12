@@ -1,5 +1,6 @@
 package cn.goktech.dolphin.security.conf;
 
+import cn.goktech.dolphin.security.exception.DolExceptionTranslator;
 import cn.goktech.dolphin.security.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,9 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -45,6 +44,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private UserDetailServiceImpl userDetailService;
     @Autowired
     private RedisTokenStore tokenStore;
+    @Autowired
+    private DolExceptionTranslator dolExceptionTranslator;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -65,6 +66,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 每次刷新后生成新的refresh_token
                 .reuseRefreshTokens(false)
                 .tokenServices(tokenServices());
+        endpoints.exceptionTranslator(dolExceptionTranslator);
     }
 
     @Override
