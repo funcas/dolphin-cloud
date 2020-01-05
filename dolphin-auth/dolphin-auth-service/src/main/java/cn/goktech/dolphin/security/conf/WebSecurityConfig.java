@@ -1,5 +1,6 @@
 package cn.goktech.dolphin.security.conf;
 
+import cn.goktech.dolphin.security.service.ITokenService;
 import cn.goktech.dolphin.security.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailServiceImpl userDetailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ITokenService tokenService;
+
+    @Bean
+    public LoginAuthenticationProvider provider(){
+        return new LoginAuthenticationProvider(userDetailService, tokenService);
+    }
 
     @Override
     @Bean
@@ -48,7 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailService)
+        auth.authenticationProvider(provider())
+                .userDetailsService(userDetailService)
                 .passwordEncoder(passwordEncoder);
     }
 

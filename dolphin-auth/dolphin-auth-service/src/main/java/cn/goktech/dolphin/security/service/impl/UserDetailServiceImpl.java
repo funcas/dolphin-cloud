@@ -31,9 +31,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private List<IAuthenticator> authenticators;
 
-//    @Autowired
-//    private ITokenService tokenService;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // TODO: 2019-04-04 评审是否需要添加缓存
@@ -44,9 +41,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         }
 
         integrationAuthentication.setUsername(username);
-        //仅允许登陆一个，开启这段代码，移除上一次生成的token
-//        tokenService.removeTokenByClientIdAndUsername(integrationAuthentication.getAuthParameter("client_id"),
-//                username);
+
         User remoteUser = this.authenticate(integrationAuthentication);
         if (remoteUser == null) {
             log.error("用户名密码不正确！");
